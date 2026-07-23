@@ -98,3 +98,50 @@ y_pred = model.predict(X_test_poly)
 
 print("\nPredicted Salaries:")
 print(y_pred)
+
+# ============================================================
+# Task 4: Model Evaluation
+# ============================================================
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+# Calculate evaluation metrics
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("\n" + "=" * 60)
+print("Model Evaluation")
+print("=" * 60)
+
+print(f"Mean Absolute Error (MAE): {mae:.2f}")
+print(f"Mean Squared Error (MSE): {mse:.2f}")
+print(f"R2 Score: {r2:.4f}")
+
+# ============================================================
+# Visualization
+# ============================================================
+
+plt.figure(figsize=(8, 6))
+
+# Original data
+plt.scatter(X, y, color="blue", label="Actual Data")
+
+# Smooth curve
+X_grid = np.arange(X.min().values[0], X.max().values[0], 0.1).reshape(-1, 1)
+
+plt.plot(
+    X_grid,
+    model.predict(poly.transform(X_grid)),
+    color="red",
+    linewidth=2,
+    label="Polynomial Regression"
+)
+
+plt.title("Salary Prediction using Polynomial Regression")
+plt.xlabel("Position Level")
+plt.ylabel("Salary")
+plt.legend()
+
+plt.show()
