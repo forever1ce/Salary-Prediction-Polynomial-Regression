@@ -73,3 +73,28 @@ print("\nTraining Feature Shape :", X_train.shape)
 print("Testing Feature Shape  :", X_test.shape)
 print("Training Target Shape  :", y_train.shape)
 print("Testing Target Shape   :", y_test.shape)
+
+# ============================================================
+# Task 3: Model Development
+# ============================================================
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+
+# Transform the input feature into polynomial features (Degree = 3)
+poly = PolynomialFeatures(degree=3)
+
+X_train_poly = poly.fit_transform(X_train)
+X_test_poly = poly.transform(X_test)
+
+# Train the Polynomial Regression model
+model = LinearRegression()
+model.fit(X_train_poly, y_train)
+
+print("\nPolynomial Regression model trained successfully!")
+
+# Predict salaries for the test dataset
+y_pred = model.predict(X_test_poly)
+
+print("\nPredicted Salaries:")
+print(y_pred)
